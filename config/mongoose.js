@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-mongoose.connect("mongodb://127.0.0.1/HabitTracker");
+mongoose.connect("mongodb://0.0.0.0:27017/HabitTracker");
 
 const db = mongoose.connection;
 
