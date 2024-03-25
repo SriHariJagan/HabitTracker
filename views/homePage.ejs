@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Habit Tracker - Home</title>
+    <script src="https://kit.fontawesome.com/40a41ef56d.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/css/home.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-left">
+            <h1>Habit Tracker</h1>
+        </div>
+        <div class="header-right">
+            <div class="user-info">
+                <span>Welcome, <strong id="name"><%=locals.user.name %></strong></span>
+                <button><a href="/logout">Logout</a></button>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <h2>Start with a new habit today!</h2>
+        <form class="typeForm" action="/user/view" method="post">
+            <div class="btns">
+                <% if(user.view === "today"){ %>
+                    <button type="submit" id="btnColor" name="type" value="today">Today</button>
+                    <button type="submit" name="type"  value="weekly">Weekly</button>
+                    <% } else { %>
+                        <button type="submit" name="type" value="today">Today</button>
+                        <button type="submit" id="btnColor" name="type"  value="weekly">Weekly</button>
+                <% } %>
+            </div>
+       </form>
+        <form action="/user/habit" method="post">
+            <input type="text" id="habitName" name="habitName" maxlength="25" required>
+            <button type="submit">Add Habit</button>
+        </form>
+        <div id="info">
+            <span><i style="color: gold; font-size: 1.5rem;" class="fas fa-minus-circle"></i> <Strong>&rarr; Default</Strong></span>
+            <span><i style="color: rgb(153, 255, 0); font-size: 1.5rem;" class="fas fa-check-circle"></i> <Strong>&rarr; Done</Strong></span>
+            <span><i style="color: #E53C37; font-size: 1.5rem;" class="fas fa-times-circle"></i> <Strong>&rarr; Not Done</Strong></span>
+        </div>
+    </div>
+    <hr>
+
+   <!-- Daily Details -->
+<%if(user.view === "today"){%>
+    <div class="day-data" id="day-data" class="hide">
+        <% for (habit of habits) { %>
+            <% if (habit) { %>
+                <div class="day-details">
+                    <button>
+                        <% let tzoffset = (new Date()).getTimezoneOffset() * 60000, found = false, status = '';
+                            var today = (new Date(Date.now() - tzoffset)).toISOString().slice(0, 10);
+                            habit.dates.find(function (item, index) {
+                                if (item.date === today) {
+                                    found = true;
+                                    status = item.status;
+                                }
+                            });
+                        %>
+                        <a href="/user/status/<%= habit.id%>/<%= today %>" >
+                            <div id="statusIcon">
+                                <% if (found && status === 'yes') { %>
+                                   <i style="color:  #00ff2a;"  class="fas fa-check-circle"></i>
+                                <% } else if (found && status === 'no') { %>
+                                   <i style="color: #E53C37;" class="fas fa-times-circle"></i>
+                                <% } else { %>
+                                   <i style="color: gold;" class="fas fa-minus-circle"></i>
+                                <% } %>
+                            </div>
+                        </a>
+                    </button> 
+                    <h2><%= habit.habitName %></h2>
+                    <button><a href="/user/delet/<%= habit.id %>" class="delet"><i class="fa-solid fa-trash-can"></i></a></button>
+                </div>
+            <% } %>
+        <% } %>
+    </div>    
+<%}else{%>
+     <!-- Weekly Details -->
+     <div class="week-data" id="week-data" class="hide">
+        <% for (habit of habits) { %>
+            <% if (habit) { %>
+                <div class="weekly-details">
+                    <div class="habit">
+                        <button><a href="/user/delet/<%= habit.id %>" class="delet"><i class="fa-solid fa-trash-can"></i></a></button>
+                        <span id="text"><%= habit.habitName %></span>
+                    </div>
+                    <div class="weeks">
+                        <% dates.forEach(i => { 
+                            let found = false, status = '';
+                            habit.dates.find(function (item, index) {
+                                if (item.date === i.date) {
+                                    found = true;
+                                    status = item.status;
+                                }
+                            });
+                            %>
+                            <div class="box">
+                                <p><span><%= i.day %></span>, <span><%= i.date.slice(-2) %></span></p>
+                                <a href="/user/status/<%= habit.id%>/<%= i.date %>" >
+                                    <% if (found && status === 'yes') { %>
+                                        <div id="done">
+                                           <button><i class="fas fa-check-circle"></i></button>
+                                        </div>
+                                    <% } else if (found && status === 'no') { %>
+                                        <div id="notdone">
+                                           <button><i class="fas fa-times-circle"></i></button>
+                                        </div>
+                                    <% } else { %>
+                                        <div id="default">
+                                           <button><i class="fas fa-minus-circle"></i></button>
+                                        </div> 
+                                    <% } %>
+                                </a>
+                            </div>
+                        <% }) %>
+                    </div>
+                </div>
+            <% } %>
+        <% } %>
+    </div>    
+<%}%>
+
+<script src="/js/homeBtn.js"></script>
+</body>
+</html>
