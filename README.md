@@ -36,6 +36,43 @@ This is a full-stack habit tracker application built using Node.js and EJS. It a
 
   ## Directory Structure
 
+          │   app.js
+          │   package-lock.json
+          │   package.json
+          │
+          ├───assets/
+          │   └───css/
+          │           home.css
+          │           welcom.css
+          │
+          ├───config/
+          │       mongoose.js
+          │       passport-local.js
+          │
+          ├───controllers/
+          │       index.js
+          │       user.js
+          │
+          ├───models/
+          │       HabitSchema.js
+          │       userSchema.js
+          │
+          ├───routes/
+          │       index.js
+          │       user.js
+          │
+          └───views/
+                  homePage.ejs
+                  layout.ejs
+                  signinPage.ejs
+                  signupPage.ejs
+                  welcomePage.ejs
+
+
+
+![image](https://github.com/SriHariJagan/HabitTracker/assets/100404902/09006c98-74cc-4c9c-bbdf-ebb3419fe061)
+
+
   
  
     
