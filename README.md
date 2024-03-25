@@ -21,7 +21,7 @@ This is a full-stack habit tracker application built using Node.js and EJS. It a
   4. Start the server:
      - npm start
   5. Access the application:
-    - Visit http://localhost:8000 in your browser.
+     - Visit http://localhost:8000 in your browser.
 
   ## Usage
   - Create new habits by clicking on the "Add Habit" button in the main view.
