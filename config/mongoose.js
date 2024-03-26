@@ -1,10 +1,17 @@
 const mongoose = require('mongoose');
+mongoose.set('strictQuery',false)
+const url = "mongodb+srv://sriharijagan333:TtNo9xopOBbtIUni@cluster0.2xscnr7.mongodb.net/HabitTracker";
 
-mongoose.connect("mongodb://0.0.0.0:27017/HabitTracker");
+const connectDB = async () => {
+    try {
+        await mongoose.connect(url);
+        console.log("DB is connected Successfully...");
+    } catch (err) {
+        console.error("Error connecting to DB:", err);
+    }
+}
 
-const db = mongoose.connection;
+module.exports = connectDB;
 
-db.on("error", (err) => console.log("error in Mongoose",err));
-db.on("open", () => console.log("DB is connected Successfully....!"));
-
-module.exports = db;
+// // Call the connectDB function to establish the connection
+connectDB();
