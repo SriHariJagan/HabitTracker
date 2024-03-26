@@ -32,7 +32,9 @@ days.push(getDateString(0));
 // Controller function for rendering the user's home page
 module.exports.userHomePage = async (req, res) => {
     try {
-        const habit = await Habit.find({});
+        console.log(req.user._id)
+        const habit = await Habit.find({ user: req.user._id });
+        console.log(habit)
         return res.render('homePage', { dates: days, habits: habit });
     } catch (err) {
         console.log(err);
