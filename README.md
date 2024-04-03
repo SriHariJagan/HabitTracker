@@ -68,7 +68,8 @@ This is a full-stack habit tracker application built using Node.js and EJS. It a
                   signupPage.ejs
                   welcomePage.ejs
 
-
+## Live Demo:
+  - https://habittracker-7sbl.onrender.com
 
 ![image](https://github.com/SriHariJagan/HabitTracker/assets/100404902/09006c98-74cc-4c9c-bbdf-ebb3419fe061)
 
