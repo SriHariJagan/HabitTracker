@@ -136,12 +136,12 @@ button:hover {
 
 .day-data, .week-data{
     margin: auto;
-    width: 75%;
+    width: 85%;
     border-radius: 10px;
-    max-height: 80px;
     max-height: 255px;
     overflow: auto;
     background: #000000b2;
+    padding: 15px 0;
 }
 
 .day-details{
@@ -157,6 +157,12 @@ button:hover {
     padding: 0 20px;
     text-transform: capitalize;
 
+    h2{
+        text-align: center;
+        max-width: 380px;
+        word-break: break-all;
+        padding: 2px 10px;
+    }
 }
 
 .day-details button,.weekly-details button {
@@ -198,7 +204,7 @@ button:hover {
 }
 
 .weeks{
-    width: calc(100% - 300px);
+    width: calc(100% - 400px);
     height: 98%;
     display: flex;
     align-items: center;
@@ -212,10 +218,11 @@ button:hover {
 }
 
 .box{
-    height: 80%;
+    height: 60px;
     width: 68px;
     background-color: #00ff2a;
     border-radius: 5px;
+    /* margin: 5px; */
 }
 
 .box p{
@@ -260,12 +267,13 @@ button:hover {
     margin: auto;
     position: relative;
     top: 20px;
-    width: 450px;
-    height: 50px;
+    padding: 8px;
+    max-width: 450px;
     background-color: #ffe8827a;
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-wrap: wrap;
     gap: 40px;
     border-radius: 10px;
 }
@@ -283,4 +291,75 @@ button:hover {
 #info strong{
     position: relative;
     top: -3px;
+}
+
+@media (max-width: 1000px) {
+
+    .header-left h1{
+        font-size: 1.2rem;
+    }
+
+   
+
+    .user-info{
+        display: flex;
+        align-items: end;
+        width: 280px;
+        #name{
+            font-size: 1rem;
+            word-wrap: break-word;
+        }
+
+        button a{
+            width: 40px;
+            font-size: 1rem;
+        }
+       
+    }
+
+    .day-data, .week-data{
+        min-height: none;
+        max-height: none;
+    }
+
+    .weekly-details{
+        background-color: #A8E6D8;
+        display: flex;
+        flex-direction: column;
+        height: auto;
+        padding: 5px 10px;
+        margin-bottom: 5px;
+
+        .habit{
+            margin-top: 5px;
+            padding: 5px;
+            width: 95%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            word-break: break-all;
+            /* background-color: #0056b3; */
+        }
+        .weeks{
+            width: 95%;
+            margin: 10px auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            right: 0;
+            padding: 10px 2px;
+            background-color: transparent;
+        }
+    }
+
+}
+
+@media (max-width: 400px){
+
+    #info{
+        justify-content: flex-start;
+        padding: 10px 20%;
+    }
+
 }
