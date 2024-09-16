@@ -1,42 +1,49 @@
 const User = require('../models/userSchema');
 
-module.exports.home = (req,res) => {
-    return res.render('welcomePage')
+//the welcome/home page
+module.exports.home = (req, res) => {
+    return res.render('welcomePage'); // Render the 'welcomePage' view
 }
 
-module.exports.signup = (req,res) => {
-    return res.render('signupPage')
+//rendering the sign-up page
+module.exports.signup = (req, res) => {
+    return res.render('signupPage'); // Render the 'signupPage' view
 }
 
-module.exports.signin = (req,res) => {
-    return res.render('signinPage')
+//rendering the sign-in page
+module.exports.signin = (req, res) => {
+    return res.render('signinPage'); // Render the 'signinPage' view
 }
 
-module.exports.signupData = async (req,res) => {
-    const user = await User.findOne({email : req.body.email});
-    if(user){
+// handling sign-up form data
+module.exports.signupData = async (req, res) => {
+    // Check if a user with the given email already exists
+    const user = await User.findOne({ email: req.body.email });
+
+    if (user) {
+        // If user exists, redirect to the sign-in page
         return res.redirect('/signinPage');
-    }else{
-      const newUser = await User.create(req.body);
-      if(newUser){
-        return res.redirect('/signinPage');
-      }else{
-        return res.redirect('/signupPage');
-      }
+    } else {
+        // Create a new user with the data from the request body
+        const newUser = await User.create(req.body);
+
+        if (newUser) {
+            return res.redirect('/signinPage');
+        } else {
+            return res.redirect('/signupPage');
+        }
     }
 }
 
-module.exports.signinData = (req,res) => {
-    return res.redirect('/user');
+//redirecting to user Page
+module.exports.signinData = (req, res) => {
+    return res.redirect('/user'); 
 }
 
-module.exports.logout = (req,res) => {
+//logging out the user
+module.exports.logout = (req, res) => {
     return req.logout(req.user, err => {
-        if(err) return next(err);
-        res.redirect("/signinPage");
-      });
+        if (err) return next(err); 
+        res.redirect("/signinPage"); 
+    });
 }
-
-
-// For HabitTracker Data
-

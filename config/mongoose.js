@@ -1,7 +1,12 @@
 const mongoose = require('mongoose');
-mongoose.set('strictQuery',false)
+
+// Disable strict query mode
+mongoose.set('strictQuery', false);
+
+// MongoDB connection URL
 const url = "mongodb+srv://sriharijagan333:TtNo9xopOBbtIUni@cluster0.2xscnr7.mongodb.net/HabitTracker";
 
+// to connect to the MongoDB database
 const connectDB = async () => {
     try {
         await mongoose.connect(url);
@@ -11,7 +16,8 @@ const connectDB = async () => {
     }
 }
 
+// for use in other files
 module.exports = connectDB;
 
-// // Call the connectDB function to establish the connection
+// to establish the connection
 connectDB();
